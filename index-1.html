@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOVE YOU ❤️</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle at center, #33000b 0%, #100006 55%, #050003 100%);
+    font-family: Arial, sans-serif; color: #ff1744;
+  }
+  .scene { position: relative; width: min(94vw, 620px); height: min(90vh, 620px); display:flex; align-items:center; justify-content:center; }
+  .heart {
+    position: relative; width: 230px; height: 230px;
+    transform: rotate(-45deg);
+    background: linear-gradient(145deg, #ff1744, #a00020);
+    animation: beat 1.05s ease-in-out infinite;
+    filter: drop-shadow(0 0 22px #ff1744) drop-shadow(0 0 55px #a00020);
+  }
+  .heart::before, .heart::after {
+    content:""; position:absolute; width:230px; height:230px;
+    border-radius:50%; background:inherit;
+  }
+  .heart::before { top:-115px; left:0; }
+  .heart::after { left:115px; top:0; }
+  .words {
+    position:absolute; inset:0; z-index:2; display:flex;
+    align-items:center; justify-content:center; flex-wrap:wrap;
+    gap:7px; padding:20px; transform:rotate(45deg);
+    color:#fff; text-shadow:0 0 8px #ff003c, 0 0 15px #ff003c;
+    font-size:clamp(10px, 2.4vw, 15px); font-weight:bold;
+    text-align:center; line-height:1.5; pointer-events:none;
+  }
+  .words span { animation: shimmer 1.4s ease-in-out infinite alternate; }
+  .center {
+    position:absolute; z-index:5; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    color:white; font-size:clamp(25px, 7vw, 42px); font-weight:900;
+    letter-spacing:2px; white-space:nowrap;
+    text-shadow:0 0 8px #fff, 0 0 20px #ff1744, 0 0 38px #ff1744;
+    animation: glow 1.05s ease-in-out infinite alternate;
+  }
+  .caption {
+    position:absolute; bottom:5%; left:0; width:100%; text-align:center;
+    color:#ff9aaa; font-size:14px; letter-spacing:3px;
+    text-shadow:0 0 12px #ff1744;
+  }
+  .spark {
+    position:absolute; color:#ff607d; font-size:18px;
+    animation: float 4s linear infinite; opacity:0;
+  }
+  @keyframes beat {
+    0%,100% { transform:rotate(-45deg) scale(1); }
+    15% { transform:rotate(-45deg) scale(1.09); }
+    30% { transform:rotate(-45deg) scale(1); }
+    45% { transform:rotate(-45deg) scale(1.06); }
+  }
+  @keyframes glow { from { opacity:.8; } to { opacity:1; text-shadow:0 0 14px white,0 0 30px #ff1744,0 0 55px #ff1744; } }
+  @keyframes shimmer { from { opacity:.65; } to { opacity:1; } }
+  @keyframes float {
+    0% { transform:translateY(30px) scale(.7); opacity:0; }
+    15% { opacity:.9; } 100% { transform:translateY(-170px) scale(1.3); opacity:0; }
+  }
+  @media (max-width:420px) {
+    .heart { width:175px; height:175px; }
+    .heart::before,.heart::after { width:175px;height:175px; }
+    .heart::before { top:-87.5px; }
+    .heart::after { left:87.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="scene" id="scene">
+  <div class="heart">
+    <div class="words" id="words"></div>
+  </div>
+  <div class="center">LOVE YOU</div>
+  <div class="caption">I LOVE YOU · I LOVE YOU · I LOVE YOU</div>
+</div>
+<script>
+  const words = document.getElementById('words');
+  for (let i = 0; i < 38; i++) {
+    const s = document.createElement('span');
+    s.textContent = 'I LOVE YOU';
+    s.style.animationDelay = (Math.random() * 1.5) + 's';
+    words.appendChild(s);
+  }
+  const scene = document.getElementById('scene');
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('div');
+    s.className = 'spark';
+    s.textContent = Math.random() > .5 ? '♥' : '✦';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = (45 + Math.random() * 55) + '%';
+    s.style.animationDelay = (Math.random() * 4) + 's';
+    s.style.animationDuration = (3 + Math.random() * 3) + 's';
+    scene.appendChild(s);
+  }
+</script>
+</body>
+</html>
